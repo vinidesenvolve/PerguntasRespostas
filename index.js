@@ -1,4 +1,4 @@
-//teste//importando modulo express
+//importando modulo express
 const express = require("express");
 const app = express();
 
