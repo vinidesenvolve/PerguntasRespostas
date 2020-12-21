@@ -10,5 +10,21 @@
         <h1>Home Page</h1>
         <hr>
         <h3>Perguntas...</h3>
+        <br>
+        <p>Nome: <%= nome %></p>
+        <p>Estado: <%= estado %></p>
+        <p>Rap é <%= associação %></p>
+        <p>Tretas <%= tretas %></p>
+
+        <% if(msg){ %>
+            <p>Um PM bom passa fome metido a charles bronson</p>
+        <% }else{ %>
+            <p>Cheiro de morte e pinho sol um preso se enforcou com lençou</p>
+        <% } %>
+        <br>    
+        <% musicas.forEach(function(musica){ %>
+            <hr>
+            <%= musica.faixa %>
+        <% }) %>
     </body>
 </html>
