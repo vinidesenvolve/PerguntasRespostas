@@ -3,6 +3,20 @@ const express = require("express");
 const app = express();
 //importando lib body-parser que traduz dados do html para js
 const bodyParser = require("body-parser");
+//importando conexão 
+const conectarDB = require("./database/database");
+//importando modulo perguntas
+const pergunta = require("./database/Perguntas");
+const Pergunta = require("./database/Perguntas");
+
+//Estabelecendo conexão com o banco
+conectarDB.authenticate()
+    .then(() => {
+        console.log("Banco de dados conectado");    
+    })
+    .catch((erro) => {
+        console.log("Banco de dados NÃO conectado!");
+    });
 
 //definindo ejs como view engine
 app.set('view engine', 'ejs'); 
@@ -24,9 +38,16 @@ app.get("/perguntar", (req, res) => {
 
 //Rota para receber info do formulário
 app.post("/receberpergunta", (req, res) => {
+    
     let titulo = req.body.titulo;
     let descricao = req.body.descricao;
-    res.send("Pergunta enviada!" + titulo + descricao);
+    
+    Pergunta.create({
+        titulo: titulo,
+        descricao: descricao
+    }).then(() => {
+        res.redirect("/")
+    });   
 });
 
 //carregamento do servidor com arrow function () =>
