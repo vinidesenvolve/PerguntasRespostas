@@ -18,5 +18,5 @@ const Pergunta = conexao.define('pergunta',{
 //Criando no Banco
 Pergunta.sync({force: false}).then(() => {});
 
-//Exportando Model pergunta
+//Exportando Model Pergunta
 module.exports = Pergunta;
