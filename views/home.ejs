@@ -1,6 +1,21 @@
 <%- include ('partials/header.ejs')%> 
 <body>
     <%- include ('partials/navbar.ejs')%> 
-    <h1>RACIONAIS MCs</h1>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Lista de Perguntas</h1>
+            </div>
+            <div class="card-body">    
+                <%perguntas.forEach(p => {%> 
+                    <li class="list-group-item">
+                        <%=p.titulo%>
+                        <hr>
+                        <button class="btn btn-success" >Responder</button>                    
+                    </li>
+                <%})%>
+            </div>
+        </div>
+    </div>
 </body>
 <%- include ('partials/footer.ejs')%> 

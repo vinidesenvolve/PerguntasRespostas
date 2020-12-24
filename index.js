@@ -28,8 +28,13 @@ app.use(express.static('public'));
 
 //Rotas
 app.get("/", (req, res) => {
-    //rederizando a pagina home.ejs e passando objetos 
-    res.render("home");
+    Pergunta.findAll({raw: true}).//SELECT * FROM perguntas
+    then(perguntasDB => {
+        res.render("home", { //rederizando a pagina home.ejs e passando objetos 
+            perguntas: perguntasDB,
+            titulo: perguntasDB.titulo   
+        }); 
+    });
 });
 
 app.get("/perguntar", (req, res) => {
@@ -44,10 +49,8 @@ app.post("/receberpergunta", (req, res) => {
     
     Pergunta.create({
         titulo: titulo,
-        descricao: descricao
-    }).then(() => {
-        res.redirect("/")
-    });   
+        descricao: descricao})
+        .then(() => {res.redirect("/")});   
 });
 
 //carregamento do servidor com arrow function () =>
