@@ -3,16 +3,18 @@
     <%- include ('partials/navbar.ejs')%> 
     <div class="container">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header text-center">
                 <h1>Lista de Perguntas</h1>
             </div>
-            <div class="card-body">    
+            <div class="card-body">  
                 <%perguntas.forEach(p => {%> 
-                    <li class="list-group-item">
-                        <%=p.titulo%>
+                        <div class="card-header">
+                            <%=p.titulo%>
+                        </div>
+                        <div class="card-body">
+                            <button class="btn btn-success" >Responder</button>    
+                        </div>
                         <hr>
-                        <button class="btn btn-success" >Responder</button>                    
-                    </li>
                 <%})%>
             </div>
         </div>

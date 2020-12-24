@@ -28,7 +28,7 @@ app.use(express.static('public'));
 
 //Rotas
 app.get("/", (req, res) => {
-    Pergunta.findAll({raw: true}).//SELECT * FROM perguntas
+    Pergunta.findAll({raw: true, order: [['id','DESC']]}).//SELECT * FROM perguntas ORDER BY id DESC
     then(perguntasDB => {
         res.render("home", { //rederizando a pagina home.ejs e passando objetos 
             perguntas: perguntasDB,
