@@ -9,15 +9,6 @@ const conectarDB = require("./database/database");
 const pergunta = require("./database/Perguntas");
 const Pergunta = require("./database/Perguntas");
 
-//Estabelecendo conexão com o banco
-conectarDB.authenticate()
-    .then(() => {
-        console.log("Banco de dados conectado");    
-    })
-    .catch((erro) => {
-        console.log("Banco de dados NÃO conectado!");
-    });
-
 //definindo ejs como view engine
 app.set('view engine', 'ejs'); 
 //conifgurando BP no express
@@ -37,8 +28,9 @@ app.get("/", (req, res) => {
     });
 });
 
+//Rota para fazer pergunta
 app.get("/perguntar", (req, res) => {
-    res.render("perguntas");
+    res.render("pergunta");
 });
 
 //Rota para receber info do formulário
@@ -53,5 +45,29 @@ app.post("/receberpergunta", (req, res) => {
         .then(() => {res.redirect("/")});   
 });
 
+//Rota para responder a pergunta
+app.get("/resposta/:id", (req, res) => {
+    let id = req.params.id;
+
+    Pergunta.findOne({
+        where:{id}
+    }).then(pergunta => {
+        if(pergunta != undefined)
+            return res.render("resposta", {
+                pergunta: pergunta
+            });
+        res.redirect("/");
+        });
+});
+
 //carregamento do servidor com arrow function () =>
 app.listen(8181, () => console.log("Server no ar fdp pa pa pa"));
+
+//Estabelecendo conexão com o banco
+conectarDB.authenticate()
+    .then(() => {
+        console.log("Banco de dados conectado");    
+    })
+    .catch((erro) => {
+        console.log("Banco de dados NÃO conectado!");
+    });
