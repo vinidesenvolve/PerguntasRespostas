@@ -5,12 +5,14 @@ const app = express();
 const bodyParser = require("body-parser");
 //importando conexão 
 const conectarDB = require("./database/database");
-//importando modulo perguntas
-const pergunta = require("./database/Perguntas");
+//importando modulo Pergunta
 const Pergunta = require("./database/Perguntas");
+//impotando modulo Resposta
+const Resposta = require("./database/Respostas");
 
 //definindo ejs como view engine
 app.set('view engine', 'ejs'); 
+
 //conifgurando BP no express
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -33,8 +35,8 @@ app.get("/perguntar", (req, res) => {
     res.render("pergunta");
 });
 
-//Rota para receber info do formulário
-app.post("/receberpergunta", (req, res) => {
+//Rota para receber pergunta
+app.post("/receberPergunta", (req, res) => {
     
     let titulo = req.body.titulo;
     let descricao = req.body.descricao;
@@ -58,6 +60,18 @@ app.get("/resposta/:id", (req, res) => {
             });
         res.redirect("/");
         });
+});
+
+//Rota para receber resposta
+app.post("/receberResposta", (req, res) => {
+
+    let resposta = req.body.corpo;
+    let id = req.body.perguntaID;
+
+    Resposta.create({
+        corpo: resposta,
+        respostaID: id})
+        .then(() => {res.redirect("/")});
 });
 
 //carregamento do servidor com arrow function () =>
