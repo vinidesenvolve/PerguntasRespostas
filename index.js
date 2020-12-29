@@ -21,7 +21,10 @@ app.use(express.static('public'));
 
 //Rotas
 app.get("/", (req, res) => {
-    Pergunta.findAll({raw: true, order: [['id','DESC']]}).//SELECT * FROM perguntas ORDER BY id DESC
+    Pergunta.findAll({ //SELECT * FROM perguntas ORDER BY id DESC
+        raw: true, 
+        order: [['id','DESC']]
+    }).
     then(perguntasDB => {
         res.render("home", { //rederizando a pagina home.ejs e passando objetos 
             perguntas: perguntasDB,
@@ -52,14 +55,23 @@ app.get("/resposta/:id", (req, res) => {
     let id = req.params.id;
 
     Pergunta.findOne({
-        where:{id}
-    }).then(pergunta => {
-        if(pergunta != undefined)
-            return res.render("resposta", {
-                pergunta: pergunta
+        where:{id} 
+    })
+    .then(pergunta => {
+        if(pergunta != undefined){
+            Resposta.findAll({ 
+                where:{perguntaID : pergunta.id},
+                order: [['id','DESC']]
+            })
+            .then(respostas => {
+                    res.render("resposta",{
+                    pergunta: pergunta,
+                    respostas: respostas
+                });
             });
-        res.redirect("/");
-        });
+        }
+        else res.redirect("/");
+    });        
 });
 
 //Rota para receber resposta
@@ -70,12 +82,12 @@ app.post("/receberResposta", (req, res) => {
 
     Resposta.create({
         corpo: resposta,
-        respostaID: id})
-        .then(() => {res.redirect("/")});
+        perguntaID: id})
+        .then(() => {res.redirect("/resposta/"+id)});
 });
 
 //carregamento do servidor com arrow function () =>
-app.listen(8181, () => console.log("Server no ar fdp pa pa pa"));
+app.listen(8181, () => console.log("No ar fdp pa pa pa"));
 
 //Estabelecendo conexão com o banco
 conectarDB.authenticate()
