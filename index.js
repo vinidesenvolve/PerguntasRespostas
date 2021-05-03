@@ -1,8 +1,6 @@
 //importando modulo express
 const express = require("express");
 const app = express();
-//importando lib body-parser que traduz dados do html para js
-const bodyParser = require("body-parser");
 //importando conexão 
 const conectarDB = require("./database/database");
 //importando modulo Pergunta
@@ -13,8 +11,8 @@ const Resposta = require("./database/Respostas");
 //definindo ejs como view engine
 app.set('view engine', 'ejs'); 
 
-//conifgurando BP no express
-app.use(bodyParser.urlencoded({extended: false}));
+//conifgurando Express indentificar Request Object como string ou array
+app.use(express.urlencoded({extended: false}));
 
 //definindo o local dos arquivos estáticos na pasta public
 app.use(express.static('public'));
