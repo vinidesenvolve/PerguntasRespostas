@@ -87,7 +87,11 @@ app.post("/receberResposta", (req, res) => {
 });
 
 //carregamento do servidor com arrow function () =>
-app.listen(8181, () => console.log("No ar fdp pa pa pa"));
+const server = app.listen(8080, () => {
+    const host = "localhost"
+    const port = server.address().port
+    console.log(`No ar em ${host}:${port}`)
+});
 
 //Estabelecendo conexão com o banco
 conectarDB.authenticate()
