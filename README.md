@@ -75,6 +75,15 @@ Execute a aplicação
 
 //No ar em localhost:8080
 
+### Tela inicial - Home
+![Imagem home](https://github.com/vinidesenvolve/PerguntasRespostas/blob/master/public/img/home.png)
+
+### Tela para perguntar - Pergunta
+![Imagem pergunta](https://github.com/vinidesenvolve/PerguntasRespostas/blob/master/public/img/pergunta.png)
+
+### Tela para responder - Resposta
+![Imagem resposta](https://github.com/vinidesenvolve/PerguntasRespostas/blob/master/public/img/resposta.png)
+
 ## Tecnologias
 
 - [Node.js](https://nodejs.org/en/)
@@ -83,6 +92,7 @@ Execute a aplicação
 - [Sequelize](https://sequelize.org/)
 - [Mysql](https://www.mysql.com/)
 - [ejs](https://ejs.co/)
+- [bootstrap](https://getbootstrap.com/)
 
 ## Autor
 
