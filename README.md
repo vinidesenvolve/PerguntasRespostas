@@ -61,8 +61,11 @@ Inicie o NPM
 Instale as dependências 
 
 <code> $ npm install express </code>
+
 <code> $ npm install ejs </code>
+
 <code> $ npm i sequelize </code>
+
 <code> $ npm i mysql2 </code>
 
 ## Executando
